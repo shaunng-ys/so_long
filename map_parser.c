@@ -53,16 +53,14 @@ char	*map_copier(char *str)
 	line = get_next_line(n);
 	grandline = ft_strdup("");
 	grandline = ft_strjoin(grandline, line);
-	ft_printf("This is the grandline: %s\n", grandline);
 	while (line)
 	{
-		printf("Line returned from gnl: %s\n", line);
 		free(line);
 		line = get_next_line(n);
+		if (line == NULL)
+			break ;
 		grandline = ft_strjoin(grandline, line);
-		ft_printf("This is the grandline: %s\n", grandline);
 	}
-	printf("This is the grandline: %s!\n", grandline);
 	return (grandline);
 }
 

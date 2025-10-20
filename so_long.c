@@ -13,9 +13,10 @@ int	main(int argc, char **argv)
 		if (map_parser(argv[1]) != 0)
 			return (1);
 		map = map_translator(argv[1]);
+		ft_printf("This is le map!\n");
 		while (map[i])
 		{
-			ft_printf("This is what it sounds like (%d): %s\n", i, map[i]);
+			ft_printf("%s\n", map[i]);
 			i++;
 		}
 	}
