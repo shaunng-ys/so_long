@@ -2,14 +2,22 @@
 
 int	main(int argc, char **argv)
 {
+	char	**map;
+	int		i;
+
 	if (argc != 2)
 		return (1);
 	else
 	{
-		if (map_parser(argv[1]) == 0)
-			ft_printf(argv[1]);
-		else
-			printf("test");
+		i = 0;
+		if (map_parser(argv[1]) != 0)
+			return (1);
+		map = map_translator(argv[1]);
+		while (map[i])
+		{
+			ft_printf("This is what it sounds like (%d): %s\n", i, map[i]);
+			i++;
+		}
 	}
 	return (0);
 }

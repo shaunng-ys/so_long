@@ -35,6 +35,8 @@ typedef struct s_linkedlist
 	int		num_operation;
 }	t_linkedlist;
 
+char			**map_translator(char *str);
+char			*map_copier(char *str);
 int				map_parser(char *str);
 //The functions below are all from push_swap
 void			radix(t_linkedlist *a, t_linkedlist *b, int index, int size);

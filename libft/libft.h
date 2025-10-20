@@ -18,8 +18,32 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h>
+# include <fcntl.h>
+# include <limits.h>
 # define STRNULL "(null)"
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
+typedef struct s_gnl{
+	int			rv;
+	char		*buffer;
+	char		*ohana;
+	char		*ph;
+	char		*ph1;
+	char		*ph2;
+	size_t		i;
+	size_t		n;
+	char		*ptr;
+}	t_gnl;
+
+char	*get_next_line(int fd);
+void	*ft_calloc(size_t count, size_t size);
+size_t	copier(char	*dest, char *src, char limiter);
+int		buffer_check(char *buffer, size_t index);
+char	*nl_split(char **leftover, char **buffer, char **ph1, char **ph2);
+char	*if_else(int *rv_ptr, int *fd_ptr, char ***leftover, t_gnl *a);
+char	*getme_a_nl(int rv, int fd, char **leftover, t_gnl *a);
 int		ft_printf(const char *format, ...);
 int		ft_printf_util1(const char *string, size_t index, va_list *args, int n);
 int		ft_printf_util2(const char *string, size_t index, va_list *args, int n);

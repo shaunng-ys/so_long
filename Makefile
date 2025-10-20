@@ -14,7 +14,7 @@
 
 # Variables below:
 
-#FLAGS = -Wall -Werror -Wextra 
+FLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 
 CC = cc
 
