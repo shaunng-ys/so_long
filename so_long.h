@@ -16,6 +16,15 @@
 # include "mlx/mlx.h"
 # include <fcntl.h>
 
+typedef struct s_catalog
+{
+	int				walls;
+	int				collectible;
+	int				player;
+	int				exit;
+	int				start;
+}	t_catalog;
+
 //The structs below are all from push_swap
 typedef struct s_node
 {
@@ -35,6 +44,10 @@ typedef struct s_linkedlist
 	int		num_operation;
 }	t_linkedlist;
 
+void			map_display(char **map, t_catalog *c);
+int				map_check(char **map, t_catalog *c);
+int				map_catalog(char **map, t_catalog *c);
+int				borders(char **map);
 char			**map_translator(char *str);
 char			*map_copier(char *str);
 int				map_parser(char *str);
