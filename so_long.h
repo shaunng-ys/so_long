@@ -18,12 +18,26 @@
 
 typedef struct s_catalog
 {
-	int				walls;
 	int				collectible;
+	int				exit[3];
+	// int				start[3];
 	int				player;
-	int				exit;
-	int				start;
 }	t_catalog;
+
+typedef struct s_maze
+{
+	char			**grid;
+	int				i;
+	int				j;
+	// int				target;
+	// int				replacement;
+	int				width;
+	int				depth;
+	int				collectible;
+	int				rescue;
+	int				result;
+	// int				ph;
+}	t_maze;
 
 //The structs below are all from push_swap
 typedef struct s_node
@@ -44,10 +58,12 @@ typedef struct s_linkedlist
 	int		num_operation;
 }	t_linkedlist;
 
-void			map_display(char **map, t_catalog *c);
-int				map_check(char **map, t_catalog *c);
-int				map_catalog(char **map, t_catalog *c);
+void			flood_fill(t_maze *waze, int i, int j);
+void			map_display(char **map, t_catalog *c, t_maze *waze);
+int				map_check(char **map, t_catalog *c, t_maze *waze);
+int				map_catalog(char **map, t_catalog *c, t_maze *waze);
 int				borders(char **map);
+int				valid_char(char c);
 char			**map_translator(char *str);
 char			*map_copier(char *str);
 int				map_parser(char *str);

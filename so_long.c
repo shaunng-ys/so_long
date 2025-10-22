@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: shaun <sng@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/22 15:29:50 by shaun             #+#    #+#             */
+/*   Updated: 2025/10/22 15:29:53 by shaun             ###   ########kl       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 
@@ -6,8 +18,10 @@ int	main(int argc, char **argv)
 {
 	char		**map;
 	t_catalog	*c;
+	t_maze		*waze;
 
 	c = malloc(sizeof(t_catalog));
+	waze = malloc(sizeof(t_maze));
 	if (argc != 2)
 		return (1);
 	else
@@ -19,11 +33,26 @@ int	main(int argc, char **argv)
 		map = map_translator(argv[1]);
 		//map_check checks the map for its elements and if its conforms
 		//with the rules i.e. no more than 1 player, exit etc.
-		if (map_check(map, c) == 1)
+		if (map_check(map, c, waze) == 1)
 			return (1);
 		//map_display displays the map in character form and prints
 		//the number of each element
-		map_display(map, c);
+		map_display(map, c, waze);
+		waze->grid = map_translator(argv[1]);
+		waze->collectible = c->collectible;
+		waze->result = 2;
+		// waze->i 
+		// if(flood_fill(waze, waze->i, waze->j == 1))
+		waze->rescue = 0;
+		// ft_printf("i: %d, j: %d\n", waze->i, waze->j);
+		flood_fill(waze, waze->i, waze->j);
+		ft_printf("Collectibles: %d, Exit Result: %d\n", waze->collectible, waze->rescue);
+		if (waze->result == 1)
+		{
+			ft_printf("Floodfill failed, this map is impossible!\n");
+			return (1);
+		}
+		map_display(waze->grid, c, waze);
 		return (0);
 	}
 	return (0);
