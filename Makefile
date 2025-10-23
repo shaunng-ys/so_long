@@ -55,7 +55,6 @@ $(LIB):
 
 $(NAME): $(OBJ) $(LIB)
 	$(CC) $(FLAGS) -I $(INC) $(LIB) $(OBJ) -Lmlx -L /usr/X11R6/lib  -lmlx -lX11 -lXext -framework OpenGL -framework AppKit -arch arm64 -o $(NAME)
-#	cc $(FLAGS) -I$(INC) $(LIB) $(OBJ) -Imlx -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 #$(CC) $(FLAGS) -I $(INC) $(OBJ) -Imlx -Lmlx -lmlx -framework OpenGL -framework AppKit -framework Cocoa -arch arm64 -o $(NAME)
 
 #$(OBJ):

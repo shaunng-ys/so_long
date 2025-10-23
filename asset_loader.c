@@ -46,7 +46,7 @@ void	init_background(void *mlx, void *win, t_assets *pic, char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			// mlx_put_image_to_window(mlx, win, pic->back, i * TILE_SIZE, j * TILE_SIZE);
+			mlx_put_image_to_window(mlx, win, pic->back, j * TILE_SIZE, i * TILE_SIZE);
 			if (map[i][j] == '1')
 				mlx_put_image_to_window(mlx, win, pic->wall, j * TILE_SIZE, i * TILE_SIZE);
 			else if (map[i][j] == 'C')

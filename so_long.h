@@ -33,12 +33,22 @@ typedef struct s_assets
 
 }	t_assets;
 
+typedef struct s_game
+{
+	char			**map;
+	int				start[3];
+	int				exit[3];
+	int				width;
+	int				depth;
+	int				collectible;
+}	t_game;
+
 typedef struct s_catalog
 {
 	int				collectible;
 	int				exit[3];
-	// int				start[3];
-	int				player;
+	int				start[3];
+	// int				player;
 }	t_catalog;
 
 typedef struct s_maze

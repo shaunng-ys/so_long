@@ -65,6 +65,7 @@ int	main(int argc, char **argv)
 		initialize_assets(mlx, image);
 		init_background(mlx, mlx_win, image, map);
 		mlx_loop(mlx);
+		mlx_key_hook(mlx_win, conditions, game);
 		return (0);
 	}
 	return (0);
