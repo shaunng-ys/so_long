@@ -16,6 +16,23 @@
 # include "mlx/mlx.h"
 # include <fcntl.h>
 
+#define TILE_SIZE 32
+
+typedef struct s_assets
+{
+	void	*exit;
+	void	*wall;
+	void	*coin;
+	void	*player;
+	void	*back;
+	char	*exit_str;
+	char	*wall_str;
+	char	*coin_str;
+	char	*player_str;
+	char	*back_str;
+
+}	t_assets;
+
 typedef struct s_catalog
 {
 	int				collectible;
@@ -58,6 +75,8 @@ typedef struct s_linkedlist
 	int		num_operation;
 }	t_linkedlist;
 
+void			initialize_assets(void	*mlx, t_assets *pic);
+void			init_background(void *mlx, void *win, t_assets *pic, char **map);
 void			flood_fill(t_maze *waze, int i, int j);
 void			map_display(char **map, t_catalog *c, t_maze *waze);
 int				map_check(char **map, t_catalog *c, t_maze *waze);

@@ -19,9 +19,15 @@ int	main(int argc, char **argv)
 	char		**map;
 	t_catalog	*c;
 	t_maze		*waze;
-
+	t_assets	*image;
+	void		*mlx;
+	void		*mlx_win;
+	// void		*img;
+	
+	mlx = mlx_init();
 	c = malloc(sizeof(t_catalog));
 	waze = malloc(sizeof(t_maze));
+	image = malloc(sizeof(t_assets));
 	if (argc != 2)
 		return (1);
 	else
@@ -53,6 +59,12 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 		map_display(waze->grid, c, waze);
+		if (mlx == NULL)
+			return (printf("error\n"), 1);
+		mlx_win = mlx_new_window(mlx, waze->width * TILE_SIZE, waze->depth * TILE_SIZE, "Screw you, I don't play your games");
+		initialize_assets(mlx, image);
+		init_background(mlx, mlx_win, image, map);
+		mlx_loop(mlx);
 		return (0);
 	}
 	return (0);
