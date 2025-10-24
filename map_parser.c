@@ -235,7 +235,7 @@ void	map_display(char **map, t_catalog *c, t_maze *waze)
 // 	line = get_next_line(n);
 // 	while (line)
 // 	{
-// 		printf("Line returned from gnl: %s\n", line);
+// 		ft_printf("Line returned from gnl: %s\n", line);
 // 		line_count++;
 // 		free(line);
 // 		line = get_next_line(n);

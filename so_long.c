@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 		}
 		map_display(waze->grid, c, waze);
 		if (mlx == NULL)
-			return (printf("error\n"), 1);
+			return (ft_printf("error\n"), 1);
 		mlx_win = mlx_new_window(mlx, (waze->width + 1) * TILE_SIZE, (waze->depth + 1) * TILE_SIZE, "Screw you, I don't play your games");
 		initialize_assets(mlx, image);
 		init_background(mlx, mlx_win, image, map);
@@ -74,7 +74,7 @@ int	main(int argc, char **argv)
 		info->i = info->c->start[0];
 		info->j = info->c->start[1];
 		mlx_key_hook(mlx_win, conditions, info);
-		// mlx_hook(mlx_win, DestroyNotify, NoEventMask, &close_shop, game);
+		mlx_hook(mlx_win, 17, 0, &close_shop, info);
 		mlx_loop(mlx);
 		return (0);
 	}
@@ -89,7 +89,7 @@ int	main(int argc, char **argv)
 
 // 	mlx = mlx_init();
 // 	if (mlx == NULL)
-// 		return (printf("error\n"), 1);
+// 		return (ft_printf("error\n"), 1);
 // 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Screw you, I don't play your games");
 // 	mlx_loop(mlx);
 // 	return (0);

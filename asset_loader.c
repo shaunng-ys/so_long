@@ -18,12 +18,12 @@ void	initialize_assets(void	*mlx, t_assets *pic)
 {
 	int	width;
 	int	height;
-
-	pic->exit_str = "assets/exit/Chicken.xpm";
-	pic->wall_str = "assets/wall/Oak_Tree.xpm";
-	pic->coin_str = "assets/collectible/eggs_brown.xpm";
-	pic->player_str = "assets/player/Player.xpm";
-	pic->back_str = "assets/background/color_background_1.xpm";
+	
+	pic->exit_str = "assets/scamdew/ladder.xpm";
+	pic->wall_str = "assets/scamdew/stone-moss.xpm";
+	pic->coin_str = "assets/scamdew/primo.xpm";
+	pic->player_str = "assets/scamdew/player-test.xpm";
+	pic->back_str = "assets/background/space.xpm";
 
 	pic->exit = mlx_xpm_file_to_image(mlx, pic->exit_str, &width, &height);
 	pic->wall = mlx_xpm_file_to_image(mlx, pic->wall_str, &width, &height);

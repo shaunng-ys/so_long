@@ -22,7 +22,7 @@
 // 	line = get_next_line(n);
 // 	while (line)
 // 	{
-// 		printf("Line returned from gnl: %s\n", line);
+// 		ft_printf("Line returned from gnl: %s\n", line);
 // 		free(line);
 // 		line = get_next_line(n);
 // 	}
