@@ -11,14 +11,14 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#define MLX_PUT_IMG mlx_put_image_to_window
 
 //Function for initializing the assets
-// void	*mlx_xpm_file_to_image(void *mlx_ptr, char *filename, int *width, int *height);
 void	initialize_assets(void	*mlx, t_assets *pic)
 {
 	int	width;
 	int	height;
-	
+
 	pic->exit_str = "assets/scamdew/ladder.xpm";
 	pic->wall_str = "assets/scamdew/stone-moss.xpm";
 	pic->coin_str = "assets/scamdew/primo.xpm";
@@ -32,7 +32,7 @@ void	initialize_assets(void	*mlx, t_assets *pic)
 	pic->back = mlx_xpm_file_to_image(mlx, pic->back_str, &width, &height);
 }
 
-void	init_background(void *mlx, void *win, t_assets *pic, char **map)
+void	init_backg(void *mlx, void *win, t_assets *pic, char **map)
 {
 	int	i;
 	int	j;
@@ -43,71 +43,17 @@ void	init_background(void *mlx, void *win, t_assets *pic, char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			mlx_put_image_to_window(mlx, win, pic->back, j * TILE_SIZE, i * TILE_SIZE);
+			MLX_PUT_IMG(mlx, win, pic->back, j * TILE, i * TILE);
 			if (map[i][j] == '1')
-				mlx_put_image_to_window(mlx, win, pic->wall, j * TILE_SIZE, i * TILE_SIZE);
+				MLX_PUT_IMG(mlx, win, pic->wall, j * TILE, i * TILE);
 			else if (map[i][j] == 'C')
-				mlx_put_image_to_window(mlx, win, pic->coin, j * TILE_SIZE, i * TILE_SIZE);
+				MLX_PUT_IMG(mlx, win, pic->coin, j * TILE, i * TILE);
 			else if (map[i][j] == 'P')
-				mlx_put_image_to_window(mlx, win, pic->player, j * TILE_SIZE, i * TILE_SIZE);
+				MLX_PUT_IMG(mlx, win, pic->player, j * TILE, i * TILE);
 			else if (map[i][j] == 'E')
-				mlx_put_image_to_window(mlx, win, pic->exit, j * TILE_SIZE, i * TILE_SIZE);
+				MLX_PUT_IMG(mlx, win, pic->exit, j * TILE, i * TILE);
 			j++;
 		}
 		i++;
 	}
 }
-// void *load_image(void *mlx, char *path)
-// {
-// 	int w, h;
-// 	void *img = mlx_xpm_file_to_image(mlx, path, &w, &h);
-// 	if (!img)
-// 		perror(path);
-// 	else
-// 		printf("Loaded %s (%dx%d)\n", path, w, h);
-// 	return img;
-// }
-
-// void initialize_assets(void *mlx, t_assets *pic)
-// {
-// 	pic->exit = load_image(mlx, "./assets/exit/Chicken.xpm");
-// 	pic->wall = load_image(mlx, "./assets/wall/Fences.xpm");
-// 	pic->coin = load_image(mlx, "./assets/collectible/eggs_brown.xpm");
-// 	pic->player = load_image(mlx, "./assets/player/Player.xpm");
-// 	pic->back = load_image(mlx, "./assets/background/space.xpm");
-// }
-
-// int		mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr, int x, int y);
-// void	init_background(void *mlx, void *win, t_assets *pic, char **map)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while (map[i])
-// 	{
-// 		j = 0;
-// 		while (map[i][j])
-// 		{
-// 			// mlx_put_image_to_window(mlx, win, pic->back, i * TILE_SIZE, j * TILE_SIZE);
-// 			if (map[i][j] == '1')
-// 				mlx_put_image_to_window(mlx, win, pic->wall, i * TILE_SIZE, j * TILE_SIZE);
-// 			else if (map[i][j] == 'C')
-// 				mlx_put_image_to_window(mlx, win, pic->coin, i * TILE_SIZE, j * TILE_SIZE);
-// 			else if (map[i][j] == 'P')
-// 				mlx_put_image_to_window(mlx, win, pic->player, i * TILE_SIZE, j * TILE_SIZE);
-// 			else if (map[i][j] == 'E')
-// 				mlx_put_image_to_window(mlx, win, pic->exit, i * TILE_SIZE, j * TILE_SIZE);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
-// void	put_to_place()
-
-// t_assets->wall = mlx_xpm_file_to_image(mlx, "assets/wall.xpm", width, height);
-
-// mlx_put_image_to_window(mlx, win_ptr, t_assets->wall, x, y);
-
-

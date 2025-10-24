@@ -33,38 +33,29 @@ int	main(int argc, char **argv)
 		return (1);
 	else
 	{
-		//map_parser checks the user input for a valid map file (format)
 		if (map_parser(argv[1]) != 0)
 			return (1);
-		//map_translator gets a copy of the map given by the user
 		map = map_translator(argv[1]);
-		//map_check checks the map for its elements and if its conforms
-		//with the rules i.e. no more than 1 player, exit etc.
 		if (map_check(map, c, waze) == 1)
 			return (1);
-		//map_display displays the map in character form and prints
-		//the number of each element
-		map_display(map, c, waze);
+		// map_display(map, c, waze);
 		waze->grid = map_translator(argv[1]);
 		waze->collectible = c->collectible;
 		waze->result = 2;
-		// waze->i 
-		// if(flood_fill(waze, waze->i, waze->j == 1))
 		waze->rescue = 0;
-		// ft_printf("i: %d, j: %d\n", waze->i, waze->j);
 		flood_fill(waze, waze->i, waze->j);
-		ft_printf("Collectibles: %d, Exit Result: %d\n", waze->collectible, waze->rescue);
+		// ft_printf("Collectibles: %d, Exit Result: %d\n", waze->collectible, waze->rescue);
 		if (waze->result == 1)
 		{
 			ft_printf("Floodfill failed, this map is impossible!\n");
 			return (1);
 		}
-		map_display(waze->grid, c, waze);
+		// map_display(waze->grid, c, waze);
 		if (mlx == NULL)
 			return (ft_printf("error\n"), 1);
-		mlx_win = mlx_new_window(mlx, (waze->width + 1) * TILE_SIZE, (waze->depth + 1) * TILE_SIZE, "Screw you, I don't play your games");
+		mlx_win = mlx_new_window(mlx, (waze->width + 1) * TILE, (waze->depth + 1) * TILE, "Screw you, I don't play your games");
 		initialize_assets(mlx, image);
-		init_background(mlx, mlx_win, image, map);
+		init_backg(mlx, mlx_win, image, map);
 		info->mlx = mlx;
 		info->win = mlx_win;
 		info->map = map;
@@ -80,17 +71,3 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-
-// int	main(void)
-// {
-// 	void	*mlx;
-// 	void	*mlx_win;
-// 	void	*img;
-
-// 	mlx = mlx_init();
-// 	if (mlx == NULL)
-// 		return (ft_printf("error\n"), 1);
-// 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Screw you, I don't play your games");
-// 	mlx_loop(mlx);
-// 	return (0);
-// }
