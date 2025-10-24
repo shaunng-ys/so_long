@@ -47,28 +47,38 @@ char	*map_copier(char *str)
 {
 	size_t	n;
 	char	*line;
+	char	*temp;
 	char	*grandline;
 
 	n = open(str, O_RDONLY);
 	line = get_next_line(n);
-	grandline = ft_strdup("");
-	grandline = ft_strjoin(grandline, line);
+	temp = ft_strdup("");
+	grandline = ft_strjoin(temp, line);
+	free(temp);
 	while (line)
 	{
 		free(line);
 		line = get_next_line(n);
 		if (line == NULL)
 			break ;
-		grandline = ft_strjoin(grandline, line);
+		temp = ft_strdup(grandline);
+		free(grandline);
+		grandline = ft_strjoin(temp, line);
+		free(temp);
 	}
+	free(line);
 	return (grandline);
 }
 
 char	**map_translator(char *str)
 {
+	char	*grandline;
 	char	**double_array;
-
-	double_array = ft_split(map_copier(str), '\n');
+	
+	grandline = map_copier(str);
+	double_array = ft_split(grandline, '\n');
+	free(grandline);
+	// double_array = ft_split(map_copier(str), '\n');
 	return (double_array);
 }
 
@@ -139,7 +149,6 @@ int	map_catalog(char **map, t_catalog *c, t_maze *waze)
 				c->start[0] = i;
 				c->start[1] = j;
 				c->start[2]++;
-				// c->player++;
 			}
 			if (map[i][j] == 'E')
 			{
@@ -166,7 +175,6 @@ int	map_check(char **map, t_catalog *c, t_maze *waze)
 {
 	c->collectible = 0;
 	c->start[2] = 0;
-	// c->start[2] = 0;
 	c->exit[2] = 0;
 	if (borders(map) != 0)
 		return (1);

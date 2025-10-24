@@ -56,7 +56,7 @@
 // 		return (1);
 // }
 
-void	move_up(t_game *info) //, int i, int j)
+void	move_up(t_game *info)
 {
 	char	target;
 
@@ -69,9 +69,17 @@ void	move_up(t_game *info) //, int i, int j)
 		if (target == 'C')
 			info->c->collectible--;
 	}
+	if (target == 'E' && info->c->collectible == 0)
+	{
+		info->map[info->i][info->j] = '0';
+		info->map[info->i--][info->j] = 'P';
+		info->i--;
+		ft_printf("Congrats gamer, ya beat the game!\n");
+		close_shop(info);
+	}
 }
 
-void	move_down(t_game *info) //, int i, int j)
+void	move_down(t_game *info)
 {
 	char	target;
 
@@ -84,9 +92,17 @@ void	move_down(t_game *info) //, int i, int j)
 		if (target == 'C')
 			info->c->collectible--;
 	}
+	if (target == 'E' && info->c->collectible == 0)
+	{
+		info->map[info->i][info->j] = '0';
+		info->map[info->i + 1][info->j] = 'P';
+		info->i++;
+		ft_printf("Congrats gamer, ya beat the game!\n");
+		close_shop(info);
+	}
 }
 
-void	move_left(t_game *info) //, int i, int j)
+void	move_left(t_game *info)
 {
 	char	target;
 
@@ -99,12 +115,21 @@ void	move_left(t_game *info) //, int i, int j)
 		if (target == 'C')
 			info->c->collectible--;
 	}
+	if (target == 'E' && info->c->collectible == 0)
+	{
+		info->map[info->i][info->j] = '0';
+		info->map[info->i][info->j - 1] = 'P';
+		info->j--;
+		ft_printf("Congrats gamer, ya beat the game!\n");
+		close_shop(info);
+	}
 }
 
-void	move_right(t_game *info)//, int i, int j)
+
+void	move_right(t_game *info)
 {
 	char	target;
-
+	
 	target = info->map[info->i][info->j + 1];
 	if (target == '0' || target == 'C')
 	{
@@ -112,45 +137,57 @@ void	move_right(t_game *info)//, int i, int j)
 		info->map[info->i][info->j + 1] = 'P';
 		info->j++;
 		if (target == 'C')
-			info->c->collectible--;
+		info->c->collectible--;
 	}
+	if (target == 'E' && info->c->collectible == 0)
+	{
+		info->map[info->i][info->j] = '0';
+		info->map[info->i][info->j + 1] = 'P';
+		info->j++;
+		ft_printf("Congrats gamer, ya beat the game!\n");
+		close_shop(info);
+	}
+}
+
+int close_shop(t_game *info)
+{
+	int	i;
+
+	i = 0;
+	mlx_destroy_window(info->mlx, info->win);
+	mlx_destroy_image(info->mlx, info->pic->back);
+	mlx_destroy_image(info->mlx, info->pic->wall);
+	mlx_destroy_image(info->mlx, info->pic->player);
+	mlx_destroy_image(info->mlx, info->pic->exit);
+	mlx_destroy_image(info->mlx, info->pic->coin);
+	free(info->pic);
+	free(info->c);
+	while (info->waze->grid[i])
+		free(info->waze->grid[i++]);
+	i = 0;
+	free(info->waze->grid);
+	free(info->waze);
+	while (info->map[i])
+		free(info->map[i++]);
+	free(info->map);
+	free(info);
+	//free everything that was malloc'd
+	exit(EXIT_SUCCESS);
 }
 
 int	conditions(int key, t_game *info)
 {
-	// int	i;
-	// int	j;
-
-	// info->i = info->c->start[0];
-	// info->j = info->c->start[1];
 	mlx_clear_window(info->mlx, info->win);
 	if (key == 119)
-		move_up(info);//, i--, j);
+		move_up(info);
 	else if (key == 115)
-		move_down(info);//, i++, j);
+		move_down(info);
 	else if (key == 97)
-		move_left(info);//, i, j--);
+		move_left(info);
 	else if (key == 100)
-		move_right(info);//, i, j++);
+		move_right(info);
 	init_background(info->mlx, info->win, info->pic, info->map);
-	// else
-	// 	continue ;
 	return (0);
-	
-	// while (info->c->collectible != 0 && i != info->c->exit[0] && j != info->c->exit[1])
-	// {
-	// if ((key == 13 || key == 126) && valid(i - 1, j, info) == 0)
-	// 	move_up(info, i, j);
-	// else if ((key == 1 || key == 125) && valid(i + 1, j, info) == 0)
-	// 	move_down(info, i, j);
-	// else if ((key == 0 || key == 123) && valid(i, j - 1, info) == 0)
-	// 	move_left(info, i, j);
-	// else if ((key == 2 || key == 124) && valid(i, j + 1, info) == 0)
-	// 	move_right(info, i, j);
-	// else
-	// 	continue ;
-	// }
-	//Close window here I guess (Collectibles collected and exit reached after all)
 }
 
 //The ones below are keycodes for linux machines presumably

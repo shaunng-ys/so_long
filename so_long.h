@@ -69,8 +69,9 @@ typedef struct s_game
 	int				width;
 	int				depth;
 	// int				collectible;
-	t_catalog		*c;
 	t_assets		*pic;
+	t_catalog		*c;
+	t_maze			*waze;
 }	t_game;
 
 //The structs below are all from push_swap
@@ -92,6 +93,7 @@ typedef struct s_linkedlist
 	int		num_operation;
 }	t_linkedlist;
 
+int 			close_shop(t_game *info);
 void			move_up(t_game *info);//, int i, int j);
 void			move_down(t_game *info);//, int i, int j);
 void			move_left(t_game *info);//, int i, int j);

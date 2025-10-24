@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 	t_game		*info;
 	void		*mlx;
 	void		*mlx_win;
-	// void		*img;
 	
 	mlx = mlx_init();
 	c = malloc(sizeof(t_catalog));
@@ -69,11 +68,13 @@ int	main(int argc, char **argv)
 		info->mlx = mlx;
 		info->win = mlx_win;
 		info->map = map;
-		info->c = c;
 		info->pic = image;
+		info->c = c;
+		info->waze = waze;
 		info->i = info->c->start[0];
 		info->j = info->c->start[1];
 		mlx_key_hook(mlx_win, conditions, info);
+		// mlx_hook(mlx_win, DestroyNotify, NoEventMask, &close_shop, game);
 		mlx_loop(mlx);
 		return (0);
 	}
