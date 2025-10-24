@@ -13,7 +13,8 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include "libft/libft.h"
-# include "mlx/mlx.h"
+// # include "mlx/mlx.h"
+# include "mlx_linux/mlx.h"
 # include <fcntl.h>
 
 #define TILE_SIZE 32
@@ -32,16 +33,6 @@ typedef struct s_assets
 	char	*back_str;
 
 }	t_assets;
-
-typedef struct s_game
-{
-	char			**map;
-	int				start[3];
-	int				exit[3];
-	int				width;
-	int				depth;
-	int				collectible;
-}	t_game;
 
 typedef struct s_catalog
 {
@@ -66,6 +57,22 @@ typedef struct s_maze
 	// int				ph;
 }	t_maze;
 
+typedef struct s_game
+{
+	void			*mlx;
+	void			*win;
+	char			**map;
+	// int				start[3];
+	// int				exit[3];
+	int				i;
+	int				j;
+	int				width;
+	int				depth;
+	// int				collectible;
+	t_catalog		*c;
+	t_assets		*pic;
+}	t_game;
+
 //The structs below are all from push_swap
 typedef struct s_node
 {
@@ -85,6 +92,11 @@ typedef struct s_linkedlist
 	int		num_operation;
 }	t_linkedlist;
 
+void			move_up(t_game *info);//, int i, int j);
+void			move_down(t_game *info);//, int i, int j);
+void			move_left(t_game *info);//, int i, int j);
+void			move_right(t_game *info);//, int i, int j);
+int				conditions(int key, t_game *info);
 void			initialize_assets(void	*mlx, t_assets *pic);
 void			init_background(void *mlx, void *win, t_assets *pic, char **map);
 void			flood_fill(t_maze *waze, int i, int j);

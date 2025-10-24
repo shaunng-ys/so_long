@@ -122,7 +122,7 @@ int	map_catalog(char **map, t_catalog *c, t_maze *waze)
 	int	j;
 
 	i = 0;
-	// j = 0;
+	j = 0;
 	while (map[i])
 	{
 		j = 0;
