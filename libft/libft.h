@@ -25,7 +25,8 @@
 #  define BUFFER_SIZE 42
 # endif
 
-typedef struct s_gnl{
+typedef struct s_gnl
+{
 	int			rv;
 	char		*buffer;
 	char		*ohana;
