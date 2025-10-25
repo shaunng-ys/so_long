@@ -12,7 +12,6 @@ int	close_shop(t_game *info)
 	mlx_destroy_image(info->mlx, info->pic->coin);
 	mlx_destroy_window(info->mlx, info->win);
 	free(info->pic);
-	free(info->c);
 	while (info->waze->grid[i])
 		free(info->waze->grid[i++]);
 	i = 0;

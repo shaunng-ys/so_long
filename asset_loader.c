@@ -24,7 +24,6 @@ void	initialize_assets(void	*mlx, t_assets *pic)
 	pic->coin_str = "assets/scamdew/primo.xpm";
 	pic->player_str = "assets/scamdew/player-test.xpm";
 	pic->back_str = "assets/background/space.xpm";
-
 	pic->exit = mlx_xpm_file_to_image(mlx, pic->exit_str, &width, &height);
 	pic->wall = mlx_xpm_file_to_image(mlx, pic->wall_str, &width, &height);
 	pic->coin = mlx_xpm_file_to_image(mlx, pic->coin_str, &width, &height);

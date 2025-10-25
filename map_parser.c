@@ -88,15 +88,13 @@ int	valid_char(char c)
 	return (0);
 }
 
-int	borders(char **map)
+int	borders(char **map, size_t l)
 {
 	int		i;
 	int		j;
-	size_t	len;
 
 	i = 0;
 	j = 0;
-	len = ft_strlen(map[i]);
 	while (map[i][j])
 	{
 		if (map[i][j] != '1')
@@ -105,7 +103,7 @@ int	borders(char **map)
 	}
 	while (map[i])
 	{
-		if (ft_strlen(map[i]) != len || map[i][0] != '1' || map[i][len - 1] != '1')
+		if (ft_strlen(map[i]) != l || map[i][0] != '1' || map[i][l - 1] != '1')
 			return (1);
 		i++;
 	}

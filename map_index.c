@@ -1,64 +1,73 @@
-
-
 #include "so_long.h"
 
-int	map_catalog(char **map, t_catalog *c, t_maze *waze)
+int	add_to_catalog(t_game *info, char **map, int i, int j)
+{
+	if (valid_char(map[i][j]) == 1)
+		return (1);
+	if (map[i][j] == 'C')
+		info->coins++;
+	if (map[i][j] == 'P')
+	{
+		info->waze->i = i;
+		info->waze->j = j;
+		info->start[0] = i;
+		info->start[1] = j;
+		info->start[2]++;
+	}
+	if (map[i][j] == 'E')
+	{
+		info->exit[0] = i;
+		info->exit[1] = j;
+		info->exit[2]++;
+	}
+	return (0);
+}
+
+int	map_catalog(char **map, t_game *info, t_maze *waze)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
+	info->waze = waze;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if (valid_char(map[i][j]) == 1)
+			if (add_to_catalog(info, map, i, j) == 1)
 				return (1);
-			if (map[i][j] == 'C')
-				c->collectible++;
-			if (map[i][j] == 'P')
-			{
-				waze->i = i;
-				waze->j = j;
-				c->start[0] = i;
-				c->start[1] = j;
-				c->start[2]++;
-			}
-			if (map[i][j] == 'E')
-			{
-				c->exit[0] = i;
-				c->exit[1] = j;
-				c->exit[2]++;
-			}
 			j++;
 		}
 		i++;
 	}
 	waze->depth = i - 1;
 	waze->width = j - 1;
-	if (c->start[2] != 1 || c->exit[2] != 1 || c->collectible < 1)
+	if (info->start[2] != 1 || info->exit[2] != 1 || info->coins < 1)
 	{
-		ft_printf("Item count invalid: Player: %d, Exit: %d, Collectible/s: %d\n", c->start[2], c->exit[2], c->collectible);
+		ft_printf("Invalid map, check your item count against rules!\n");
 		return (1);
 	}
 	return (0);
 }
 
-int	map_check(char **map, t_catalog *c, t_maze *waze)
+int	map_check(char **map, t_game *info, t_maze *waze)
 {
-	c->collectible = 0;
-	c->start[2] = 0;
-	c->exit[2] = 0;
-	if (borders(map) != 0)
+	size_t	len;
+
+	info->coins = 0;
+	info->start[2] = 0;
+	info->exit[2] = 0;
+	len = ft_strlen(map[0]);
+	if (borders(map, len) != 0)
 		return (1);
-	if (map_catalog(map, c, waze) != 0)
+	if (map_catalog(map, info, waze) != 0)
 		return (1);
 	return (0);
 }
 
-void	map_display(char **map, t_catalog *c, t_maze *waze)
+void	map_display(char **map, t_game *info, t_maze *waze)
 {
 	int	i;
 
@@ -70,8 +79,7 @@ void	map_display(char **map, t_catalog *c, t_maze *waze)
 		i++;
 	}
 	ft_printf("\nMap Info:\n");
-	ft_printf("Collectible/s: %d\n", c->collectible);
-	ft_printf("Player/s: %d\nExit/s: %d\n", c->start[2], c->exit[2]);
+	ft_printf("Collectible/s: %d\n", info->coins);
+	ft_printf("Player/s: %d\nExit/s: %d\n", info->start[2], info->exit[2]);
 	ft_printf("Width: %d\nDepth: %d\n", waze->width, waze->depth);
-
 }

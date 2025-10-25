@@ -23,9 +23,9 @@ void	move_up(t_game *info)
 		info->map[info->i - 1][info->j] = 'P';
 		info->i--;
 		if (target == 'C')
-			info->c->collectible--;
+			info->coins--;
 	}
-	if (target == 'E' && info->c->collectible == 0)
+	if (target == 'E' && info->coins == 0)
 	{
 		info->map[info->i][info->j] = '0';
 		info->map[info->i--][info->j] = 'P';
@@ -46,9 +46,9 @@ void	move_down(t_game *info)
 		info->map[info->i + 1][info->j] = 'P';
 		info->i++;
 		if (target == 'C')
-			info->c->collectible--;
+			info->coins--;
 	}
-	if (target == 'E' && info->c->collectible == 0)
+	if (target == 'E' && info->coins == 0)
 	{
 		info->map[info->i][info->j] = '0';
 		info->map[info->i + 1][info->j] = 'P';
@@ -69,9 +69,9 @@ void	move_left(t_game *info)
 		info->map[info->i][info->j - 1] = 'P';
 		info->j--;
 		if (target == 'C')
-			info->c->collectible--;
+			info->coins--;
 	}
-	if (target == 'E' && info->c->collectible == 0)
+	if (target == 'E' && info->coins == 0)
 	{
 		info->map[info->i][info->j] = '0';
 		info->map[info->i][info->j - 1] = 'P';
@@ -80,7 +80,6 @@ void	move_left(t_game *info)
 		close_shop(info);
 	}
 }
-
 
 void	move_right(t_game *info)
 {
@@ -93,9 +92,9 @@ void	move_right(t_game *info)
 		info->map[info->i][info->j + 1] = 'P';
 		info->j++;
 		if (target == 'C')
-			info->c->collectible--;
+			info->coins--;
 	}
-	if (target == 'E' && info->c->collectible == 0)
+	if (target == 'E' && info->coins == 0)
 	{
 		info->map[info->i][info->j] = '0';
 		info->map[info->i][info->j + 1] = 'P';

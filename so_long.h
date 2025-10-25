@@ -33,13 +33,6 @@ typedef struct s_assets
 
 }	t_assets;
 
-typedef struct s_catalog
-{
-	int				collectible;
-	int				exit[3];
-	int				start[3];
-}	t_catalog;
-
 typedef struct s_maze
 {
 	char			**grid;
@@ -52,20 +45,37 @@ typedef struct s_maze
 	int				result;
 }	t_maze;
 
+// typedef struct s_catalog
+// {
+// 	int				coins;
+// 	int				exit[3];
+// 	int				start[3];
+// 	t_maze			*waze;
+// }	t_catalog;
+
 typedef struct s_game
 {
 	void			*mlx;
 	void			*win;
 	char			**map;
+	int				map_valid;
 	int				i;
 	int				j;
 	int				width;
 	int				depth;
-	t_assets		*pic;
-	t_catalog		*c;
+	int				coins;
+	int				exit[3];
+	int				start[3];
 	t_maze			*waze;
+	t_assets		*pic;
+	// t_catalog		*c;
+	// t_maze			*waze;
 }	t_game;
 
+void			init(t_game *info, t_assets *image, t_maze *waze, char **map);
+void			g_init(t_game *info, t_assets *img, t_maze *waze, char **map);
+int				map_logic(t_maze *waze, t_game *info, char *map_str);
+int				add_to_catalog(t_game *info, char **map, int i, int j);
 int				close_shop(t_game *info);
 void			move_up(t_game *info);//, int i, int j);
 void			move_down(t_game *info);//, int i, int j);
@@ -75,10 +85,10 @@ int				conditions(int key, t_game *info);
 void			initialize_assets(void	*mlx, t_assets *pic);
 void			init_backg(void *mlx, void *win, t_assets *pic, char **map);
 void			flood_fill(t_maze *waze, int i, int j);
-void			map_display(char **map, t_catalog *c, t_maze *waze);
-int				map_check(char **map, t_catalog *c, t_maze *waze);
-int				map_catalog(char **map, t_catalog *c, t_maze *waze);
-int				borders(char **map);
+void			map_display(char **map, t_game *info, t_maze *waze);
+int				map_check(char **map, t_game *info, t_maze *waze);
+int				map_catalog(char **map, t_game *info, t_maze *waze);
+int				borders(char **map, size_t l);
 int				valid_char(char c);
 char			**map_translator(char *str);
 char			*map_copier(char *str);

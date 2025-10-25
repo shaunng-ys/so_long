@@ -12,62 +12,38 @@
 
 #include "so_long.h"
 
-
+void	init(t_game *info, t_assets *image, t_maze *waze, char **map)
+{
+	initialize_assets(info->mlx, image);
+	init_backg(info->mlx, info->win, image, map);
+	g_init(info, image, waze, map);
+}
 
 int	main(int argc, char **argv)
 {
 	char		**map;
-	t_catalog	*c;
 	t_maze		*waze;
 	t_assets	*image;
 	t_game		*info;
-	void		*mlx;
-	void		*mlx_win;
-	
-	mlx = mlx_init();
-	c = malloc(sizeof(t_catalog));
-	waze = malloc(sizeof(t_maze));
-	image = malloc(sizeof(t_assets));
-	info = malloc(sizeof(t_game));
+
 	if (argc != 2)
 		return (1);
-	else
-	{
-		if (map_parser(argv[1]) != 0)
-			return (1);
-		map = map_translator(argv[1]);
-		if (map_check(map, c, waze) == 1)
-			return (1);
-		// map_display(map, c, waze);
-		waze->grid = map_translator(argv[1]);
-		waze->collectible = c->collectible;
-		waze->result = 2;
-		waze->rescue = 0;
-		flood_fill(waze, waze->i, waze->j);
-		// ft_printf("Collectibles: %d, Exit Result: %d\n", waze->collectible, waze->rescue);
-		if (waze->result == 1)
-		{
-			ft_printf("Floodfill failed, this map is impossible!\n");
-			return (1);
-		}
-		// map_display(waze->grid, c, waze);
-		if (mlx == NULL)
-			return (ft_printf("error\n"), 1);
-		mlx_win = mlx_new_window(mlx, (waze->width + 1) * TILE, (waze->depth + 1) * TILE, "Screw you, I don't play your games");
-		initialize_assets(mlx, image);
-		init_backg(mlx, mlx_win, image, map);
-		info->mlx = mlx;
-		info->win = mlx_win;
-		info->map = map;
-		info->pic = image;
-		info->c = c;
-		info->waze = waze;
-		info->i = info->c->start[0];
-		info->j = info->c->start[1];
-		mlx_key_hook(mlx_win, conditions, info);
-		mlx_hook(mlx_win, 17, 0, &close_shop, info);
-		mlx_loop(mlx);
-		return (0);
-	}
+	info = malloc(sizeof(t_game));
+	waze = malloc(sizeof(t_maze));
+	image = malloc(sizeof(t_assets));
+	info->mlx = mlx_init();
+	if (map_parser(argv[1]) != 0)
+		return (1);
+	map = map_translator(argv[1]);
+	if (map_check(map, info, waze) == 1)
+		return (1);
+	if (map_logic(waze, info, argv[1]) == 1)
+		return (1);
+	info->win = mlx_new_window(info->mlx,
+			(waze->width + 1) * TILE, (waze->depth + 1) * TILE, "Game");
+	init(info, image, waze, map);
+	mlx_key_hook(info->win, conditions, info);
+	mlx_hook(info->win, 17, 0, &close_shop, info);
+	mlx_loop(info->mlx);
 	return (0);
 }
