@@ -24,12 +24,16 @@ void	move_up(t_game *info)
 		info->i--;
 		if (target == 'C')
 			info->coins--;
+		info->moves++;
+		ft_printf("Number of moves made: %d\n", info->moves);
 	}
 	if (target == 'E' && info->coins == 0)
 	{
 		info->map[info->i][info->j] = '0';
 		info->map[info->i--][info->j] = 'P';
 		info->i--;
+		info->moves++;
+		ft_printf("Number of moves made: %d\n", info->moves);
 		ft_printf("Congrats gamer, ya beat the game!\n");
 		close_shop(info);
 	}
@@ -47,12 +51,16 @@ void	move_down(t_game *info)
 		info->i++;
 		if (target == 'C')
 			info->coins--;
+		info->moves++;
+		ft_printf("Number of moves made: %d\n", info->moves);
 	}
 	if (target == 'E' && info->coins == 0)
 	{
 		info->map[info->i][info->j] = '0';
 		info->map[info->i + 1][info->j] = 'P';
 		info->i++;
+		info->moves++;
+		ft_printf("Number of moves made: %d\n", info->moves);
 		ft_printf("Congrats gamer, ya beat the game!\n");
 		close_shop(info);
 	}
@@ -70,12 +78,16 @@ void	move_left(t_game *info)
 		info->j--;
 		if (target == 'C')
 			info->coins--;
+		info->moves++;
+		ft_printf("Number of moves made: %d\n", info->moves);
 	}
 	if (target == 'E' && info->coins == 0)
 	{
 		info->map[info->i][info->j] = '0';
 		info->map[info->i][info->j - 1] = 'P';
 		info->j--;
+		info->moves++;
+		ft_printf("Number of moves made: %d\n", info->moves);
 		ft_printf("Congrats gamer, ya beat the game!\n");
 		close_shop(info);
 	}
@@ -93,12 +105,16 @@ void	move_right(t_game *info)
 		info->j++;
 		if (target == 'C')
 			info->coins--;
+		info->moves++;
+		ft_printf("Number of moves made: %d\n", info->moves);
 	}
 	if (target == 'E' && info->coins == 0)
 	{
 		info->map[info->i][info->j] = '0';
 		info->map[info->i][info->j + 1] = 'P';
 		info->j++;
+		info->moves++;
+		ft_printf("Number of moves made: %d\n", info->moves);
 		ft_printf("Congrats gamer, ya beat the game!\n");
 		close_shop(info);
 	}

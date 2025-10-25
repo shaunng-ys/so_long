@@ -19,7 +19,10 @@ void	flood_fill(t_maze *waze, int i, int j)
 	if (waze->grid[i][j] == 'C')
 		waze->collectible--;
 	if (waze->grid[i][j] == 'E')
+	{
 		waze->rescue = 1;
+		return ;
+	}
 	waze->grid[i][j] = 'F';
 	flood_fill(waze, i + 1, j);
 	flood_fill(waze, i - 1, j);

@@ -14,6 +14,7 @@
 
 void	init(t_game *info, t_assets *image, t_maze *waze, char **map)
 {
+	info->moves = 0;
 	initialize_assets(info->mlx, image);
 	init_backg(info->mlx, info->win, image, map);
 	g_init(info, image, waze, map);
@@ -28,17 +29,17 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (1);
+	if (map_parser(argv[1]) != 0)
+		return (1);
 	info = malloc(sizeof(t_game));
 	waze = malloc(sizeof(t_maze));
 	image = malloc(sizeof(t_assets));
-	info->mlx = mlx_init();
-	if (map_parser(argv[1]) != 0)
-		return (1);
 	map = map_translator(argv[1]);
 	if (map_check(map, info, waze) == 1)
-		return (1);
+		free_map(map, info, waze, image);
 	if (map_logic(waze, info, argv[1]) == 1)
-		return (1);
+		free_map(map, info, waze, image);
+	info->mlx = mlx_init();
 	info->win = mlx_new_window(info->mlx,
 			(waze->width + 1) * TILE, (waze->depth + 1) * TILE, "Game");
 	init(info, image, waze, map);

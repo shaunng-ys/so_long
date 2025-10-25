@@ -2,6 +2,8 @@
 
 int	map_logic(t_maze *waze, t_game *info, char *map_str)
 {
+	int	i;
+
 	waze->grid = map_translator(map_str);
 	waze->collectible = info->coins;
 	waze->result = 2;
@@ -9,9 +11,17 @@ int	map_logic(t_maze *waze, t_game *info, char *map_str)
 	flood_fill(waze, waze->i, waze->j);
 	if (waze->result == 1)
 	{
-		ft_printf("Floodfill failed, this map is impossible!\n");
+		i = 0;
+		while (waze->grid[i])
+			free(waze->grid[i++]);
+		free(waze->grid);
+		ft_printf("Error\nFloodfill failed, this map is impossible\n");
 		return (1);
 	}
+	i = 0;
+	while (waze->grid[i])
+		free(waze->grid[i++]);
+	free(waze->grid);
 	return (0);
 }
 

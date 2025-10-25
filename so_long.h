@@ -45,14 +45,6 @@ typedef struct s_maze
 	int				result;
 }	t_maze;
 
-// typedef struct s_catalog
-// {
-// 	int				coins;
-// 	int				exit[3];
-// 	int				start[3];
-// 	t_maze			*waze;
-// }	t_catalog;
-
 typedef struct s_game
 {
 	void			*mlx;
@@ -66,12 +58,12 @@ typedef struct s_game
 	int				coins;
 	int				exit[3];
 	int				start[3];
+	int				moves;
 	t_maze			*waze;
 	t_assets		*pic;
-	// t_catalog		*c;
-	// t_maze			*waze;
 }	t_game;
 
+void			free_map(char **map, t_game *info, t_maze *waze, t_assets *img);
 void			init(t_game *info, t_assets *image, t_maze *waze, char **map);
 void			g_init(t_game *info, t_assets *img, t_maze *waze, char **map);
 int				map_logic(t_maze *waze, t_game *info, char *map_str);

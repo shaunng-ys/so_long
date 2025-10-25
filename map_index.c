@@ -46,7 +46,7 @@ int	map_catalog(char **map, t_game *info, t_maze *waze)
 	waze->width = j - 1;
 	if (info->start[2] != 1 || info->exit[2] != 1 || info->coins < 1)
 	{
-		ft_printf("Invalid map, check your item count against rules!\n");
+		ft_printf("Error\nInvalid map, check your item count against rules!\n");
 		return (1);
 	}
 	return (0);

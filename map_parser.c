@@ -82,7 +82,7 @@ int	valid_char(char c)
 {
 	if (c != '1' && c != '0' && c != 'C' && c != 'E' && c != 'P')
 	{
-		ft_printf("This is the invalid character: %c\n", c);
+		ft_printf("Error\nInvalid character in map: %c\n", c);
 		return (1);
 	}
 	return (0);
@@ -98,20 +98,20 @@ int	borders(char **map, size_t l)
 	while (map[i][j])
 	{
 		if (map[i][j] != '1')
-			return (1);
+			return (ft_printf("Error\nMaps wall/s uneven/open\n"), 1);
 		j++;
 	}
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) != l || map[i][0] != '1' || map[i][l - 1] != '1')
-			return (1);
+			return (ft_printf("Error\nMaps wall/s uneven/open\n"), 1);
 		i++;
 	}
 	j = 0;
 	while (map[i - 1][j])
 	{
 		if (map[i - 1][j] != '1')
-			return (1);
+			return (ft_printf("Error\nMaps wall/s uneven/open\n"), 1);
 		j++;
 	}
 	return (0);
