@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shaun <sng@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: sng <sng@student.42kl.edu.my>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:11:35 by shaun             #+#    #+#             */
-/*   Updated: 2024/11/28 16:11:38 by shaun             ###   ########kl       */
+/*   Updated: 2025/10/30 14:27:05 by sng              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,39 +43,74 @@
 // 	return (sign_tracker0);
 // }
 
-static int	ft_divisor(int counter)
-{
-	int	multiplier;
+// static int	ft_divisor(int counter)
+// {
+// 	int	multiplier;
 
-	multiplier = 1;
-	while (--counter > 0)
-		multiplier *= 10;
-	return (multiplier);
-}
+// 	multiplier = 1;
+// 	while (--counter > 0)
+// 		multiplier *= 10;
+// 	return (multiplier);
+// }
+
+// static int	part2atoi(const char *string, int index)
+// {
+// 	int	counter;
+// 	int	multiplier;
+// 	int	tally;
+// 	int	nbr2add;
+
+// 	counter = 0;
+// 	multiplier = 1;
+// 	tally = 0;
+// 	nbr2add = 0;
+// 	while (string[index] >= '0' && string[index] <= '9')
+// 	{
+// 		counter++;
+// 		index++;
+// 	}
+// 	index = index - counter;
+// 	multiplier = ft_divisor(counter);
+// 	while (string[index] >= '0' && string[index] <= '9')
+// 	{
+// 		nbr2add = (string[index++] - 48) * multiplier;
+// 		if (multiplier > 1)
+// 			multiplier = multiplier / 10;
+// 		tally = tally + nbr2add;
+// 	}
+// 	return (tally);
+// }
+
+// int	ft_atoi(const char *nptr)
+// {
+// 	int	i;
+// 	int	sign_tracker;
+
+// 	i = 0;
+// 	sign_tracker = 1;
+// 	while ((nptr[i] == ' ' || (nptr[i] > 8 && nptr[i] < 14)))
+// 		i++;
+// 	if (nptr[i] == '+' || nptr[i] == '-')
+// 	{
+// 		if (nptr[i++] == '+')
+// 			sign_tracker = 1;
+// 		else
+// 			sign_tracker = -1;
+// 	}
+// 	return (part2atoi(nptr, i) * sign_tracker);
+// }
 
 static int	part2atoi(const char *string, int index)
 {
-	int	counter;
-	int	multiplier;
 	int	tally;
 	int	nbr2add;
 
-	counter = 0;
-	multiplier = 1;
 	tally = 0;
 	nbr2add = 0;
 	while (string[index] >= '0' && string[index] <= '9')
 	{
-		counter++;
-		index++;
-	}
-	index = index - counter;
-	multiplier = ft_divisor(counter);
-	while (string[index] >= '0' && string[index] <= '9')
-	{
-		nbr2add = (string[index++] - 48) * multiplier;
-		if (multiplier > 1)
-			multiplier = multiplier / 10;
+		tally = tally * 10;
+		nbr2add = (string[index++] - 48);
 		tally = tally + nbr2add;
 	}
 	return (tally);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shaun <sng@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: sng <sng@student.42kl.edu.my>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/17 01:01:54 by shaun             #+#    #+#             */
-/*   Updated: 2025/10/17 01:03:40 by shaun             ###   ########kl       */
+/*   Created: 2025/10/30 14:29:57 by sng               #+#    #+#             */
+/*   Updated: 2025/10/30 14:30:18 by sng              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include "libft/libft.h"
-# include "mlx_linux/mlx.h"
+# include "minilibx-linux/mlx.h"
 # include <fcntl.h>
 
 # define TILE 64
@@ -69,10 +69,10 @@ void			g_init(t_game *info, t_assets *img, t_maze *waze, char **map);
 int				map_logic(t_maze *waze, t_game *info, char *map_str);
 int				add_to_catalog(t_game *info, char **map, int i, int j);
 int				close_shop(t_game *info);
-void			move_up(t_game *info);//, int i, int j);
-void			move_down(t_game *info);//, int i, int j);
-void			move_left(t_game *info);//, int i, int j);
-void			move_right(t_game *info);//, int i, int j);
+void			move_up(t_game *info);
+void			move_down(t_game *info);
+void			move_left(t_game *info);
+void			move_right(t_game *info);
 int				conditions(int key, t_game *info);
 void			initialize_assets(void	*mlx, t_assets *pic);
 void			init_backg(void *mlx, void *win, t_assets *pic, char **map);

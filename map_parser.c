@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shaun <sng@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: sng <sng@student.42kl.edu.my>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 15:20:05 by shaun             #+#    #+#             */
-/*   Updated: 2025/10/20 15:20:07 by shaun             ###   ########kl       */
+/*   Updated: 2025/10/29 22:09:11 by sng              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	check_extension(char *str)
+{
+	char	*last_slash;
+	int		len;
+
+	len = 0;
+	last_slash = ft_strrchr(str, '/');
+	if (last_slash == NULL)
+		len = ft_strlen(str);
+	else
+		len = ft_strlen(last_slash + 1);
+	if (len < 5)
+	{
+		ft_printf("Error\nBad extension\n");
+		return (1);
+	}
+	if (ft_strncmp((str + ft_strlen(str) - 4), ".ber", 5) != 0)
+	{
+		ft_printf("Error\nBad extension \n");
+		return (1);
+	}
+	return (0);
+}
 
 int	map_parser(char *str)
 {
@@ -20,23 +44,15 @@ int	map_parser(char *str)
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("File %s doesn't exist!\n", str);
+		ft_printf("Error\nFile %s doesn't exist!\n", str);
 		close(fd);
 		return (1);
 	}
 	else
 		close(fd);
 	len = ft_strlen(str);
-	if (len < 5)
-	{
-		ft_printf("Len of file not possible\n");
+	if (check_extension(str))
 		return (1);
-	}
-	if (ft_strncmp((str + len - 4), ".ber", 5) != 0)
-	{
-		ft_printf("File does not end in .ber!\n");
-		return (1);
-	}
 	return (0);
 }
 
@@ -49,6 +65,8 @@ char	*map_copier(char *str)
 
 	n = open(str, O_RDONLY);
 	line = get_next_line(n);
+	if (line == NULL)
+		return (free(line), NULL);
 	temp = ft_strdup("");
 	grandline = ft_strjoin(temp, line);
 	free(temp);
@@ -73,19 +91,14 @@ char	**map_translator(char *str)
 	char	**double_array;
 
 	grandline = map_copier(str);
+	if (grandline == NULL)
+	{
+		ft_printf("Error\nEmpty Map\n");
+		return (NULL);
+	}
 	double_array = ft_split(grandline, '\n');
 	free(grandline);
 	return (double_array);
-}
-
-int	valid_char(char c)
-{
-	if (c != '1' && c != '0' && c != 'C' && c != 'E' && c != 'P')
-	{
-		ft_printf("Error\nInvalid character in map: %c\n", c);
-		return (1);
-	}
-	return (0);
 }
 
 int	borders(char **map, size_t l)
